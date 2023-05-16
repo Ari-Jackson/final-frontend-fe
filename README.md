@@ -2,11 +2,6 @@
 
 [Deployment Link Coming Soon]()
 
-## Table of Contents
-- _Project Description_
-- _Technologies used_
-- _Installing this project_
-
 ##  Project Description
 Coming soon...
 
