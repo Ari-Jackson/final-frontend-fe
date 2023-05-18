@@ -6,10 +6,10 @@ export default function FilterButton() {
     <>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <button className="mt-3 flex items-center rounded-md border px-4 py-2 text-center font-medium text-gray-700 duration-150 hover:bg-gray-50 active:bg-gray-100 sm:mt-0 md:text-sm">
+          <div className="mt-3 flex items-center rounded-md border px-4 py-2 text-center font-medium text-gray-700 duration-150 hover:bg-gray-50 active:bg-gray-100 sm:mt-0 md:text-sm">
             <BsSliders className="mr-2" />
             Sort
-          </button>
+          </div>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Portal>
