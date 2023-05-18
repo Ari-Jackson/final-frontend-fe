@@ -1,59 +1,91 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
 
-type Inputs = {
+export type Inputs = {
   title: string;
   genre: string;
   rating: number;
-  favorite: boolean;
-  currentRead: boolean;
-  readBefore: boolean;
-  list: string;
+  isFavorite: boolean;
+  isCurrentRead: boolean;
+  hasReadBefore: boolean;
 };
 
-export default function Form() {
+export default function Form({
+  values,
+  onSubmitFunc,
+}: {
+  values: Inputs;
+  onSubmitFunc: SubmitHandler<Inputs>;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  console.log(errors);
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: "",
+      genre: "",
+      rating: 0,
+      isFavorite: true,
+      isCurrentRead: false,
+      hasReadBefore: false,
+    },
+    values,
+  });
+  const onSubmit: SubmitHandler<Inputs> = (data) => onSubmitFunc(data);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="m-auto mt-10 w-full max-w-lg border px-10 py-10"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <label className="font-medium text-gray-600">Book Title</label>
       <input
+        className="w-full  rounded border border-solid border-gray-300 px-4
+      py-2 text-gray-700"
         type="text"
-        placeholder="title"
+        placeholder="Book Title"
         {...register("title", { required: true, maxLength: 500 })}
       />
+
+      <label className="font-medium text-gray-600">Book Genre</label>
       <input
         type="text"
-        placeholder="genre"
+        className="w-full rounded border border-solid border-gray-300 px-4
+    py-2 text-gray-700"
+        placeholder="Book Genre"
         {...register("genre", { required: true, maxLength: 255 })}
       />
+      <label className="font-medium text-gray-600">Rating</label>
       <input
         type="number"
-        placeholder="rating"
+        className="w-full rounded border border-solid border-gray-300 px-4
+    py-2 text-gray-700"
+        placeholder="Rating"
         {...register("rating", { max: 10, min: 0 })}
       />
-      <input type="text" placeholder="list" {...register("list", {})} />
       <input
         type="checkbox"
-        placeholder="favorite"
-        {...register("favorite", {})}
+        placeholder="Is this a favorite>"
+        {...register("isFavorite", {})}
       />
+      <label className="font-medium text-gray-600">Favorite</label>
       <input
         type="checkbox"
-        placeholder="currentRead"
-        {...register("currentRead", {})}
+        placeholder="Is This A current read?"
+        {...register("isCurrentRead", {})}
       />
+      <label className="font-medium text-gray-600">Current Read</label>
       <input
         type="checkbox"
-        placeholder="readBefore"
-        {...register("readBefore", {})}
+        placeholder="Have you read this before?"
+        {...register("hasReadBefore", {})}
       />
+      <label className="font-medium text-gray-600">Read Before</label>
 
-      <input type="submit" />
+      <input
+        className="text-md mt-4 w-full rounded border bg-green-400 px-6 py-3 font-semibold text-green-100 shadow hover:bg-green-600"
+        type="submit"
+      />
     </form>
   );
 }
