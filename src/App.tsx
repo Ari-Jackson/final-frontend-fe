@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./components/global/NavBar";
-import Footer from "./components/global/Footer";
+
 import Home from "./pages/Home";
 import Index from "./pages/Index";
 import New from "./pages/New";
@@ -17,7 +16,6 @@ export default function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Router>
-          <NavBar />
           <PageWrapper>
             <Routes>
               <Route path="/" element={<Home />} />
@@ -28,7 +26,6 @@ export default function App() {
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </PageWrapper>
-          <Footer />
         </Router>
       </QueryClientProvider>
     </>

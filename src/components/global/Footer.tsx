@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <>
-      <div className="absolute bottom-0 h-16 w-full border-t border-gray-100 ">
+      <div className="absolute bottom-0 h-14 w-full border-t border-gray-100 bg-white">
         <div className="h-full w-full space-x-3 sm:flex sm:items-center sm:justify-center">
           <p className="text-xs text-gray-500">
             &copy; 2023 Made by Ari with ❤️
