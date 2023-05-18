@@ -13,6 +13,9 @@ The Table Potluck App leverages the following technologies and frameworks:
 - TanStack Query
 - Typescript
 - Tailwind CSS
+- React Icons
+- Radix
+- Vite
 
 
 ## Installing this repo
