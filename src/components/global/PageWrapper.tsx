@@ -1,7 +1,10 @@
 import Footer from "./Footer";
 import NavBar from "./NavBar";
+export declare interface AppProps {
+  children?: React.ReactNode; // best, accepts everything React can render
+}
 
-export default function PageWrapper({ children }) {
+export default function PageWrapper({ children }: AppProps) {
   return (
     <>
       <div className="relative h-full min-h-screen">
