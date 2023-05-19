@@ -25,11 +25,7 @@ export default function Form({
   values?: Inputs;
   onSubmitFunc: SubmitHandler<Inputs>;
 }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Inputs>({
+  const { register, handleSubmit } = useForm<Inputs>({
     defaultValues: {
       title: "",
       genre: "",
