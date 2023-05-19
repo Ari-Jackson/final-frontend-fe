@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
+
 export default function PageNotFound() {
   return (
     <>
-      <div className="grid h-screen place-content-center bg-white px-4">
-        <div className="text-center">
+      <div className="my-auto grid h-full place-content-center bg-white px-4 pt-20">
+        <div className="flex flex-col items-center space-y-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1024 768"
@@ -26,7 +28,15 @@ export default function PageNotFound() {
             Uh-oh!
           </h1>
 
-          <p className="mt-4 text-gray-500">We can't find that page.</p>
+          <p className="mt-4 text-gray-500">
+            We can't find the page you're looking for.
+          </p>
+          <Link
+            to="/"
+            className="block w-fit rounded-full bg-pink-400 px-7 py-3 text-center text-white"
+          >
+            Take me home!
+          </Link>
         </div>
       </div>
     </>

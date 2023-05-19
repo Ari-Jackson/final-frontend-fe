@@ -1,4 +1,4 @@
-export default function ServerDownSVG() {
+export default function ServerDownPage() {
   return (
     <>
       <div className="text-center">
