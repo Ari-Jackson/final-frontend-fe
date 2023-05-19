@@ -1,15 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
-import { type Inputs } from "../../components/Form";
+import { Outputs } from "../../components/Form";
 
 type PutTypes = {
   id: string | undefined;
-  updatedBook: Inputs;
+  updatedBook: Outputs;
 };
 
 export default function useUpdateBook() {
   const API = import.meta.env.VITE_API_URL;
 
-  const { mutate, isLoading, isError, isSuccess } = useMutation({
+  const {
+    mutate,
+    isLoading: updateIsLoading,
+    isError: updateIsError,
+    isSuccess: updateIsSuccess,
+    error,
+  } = useMutation({
     mutationFn: async ({ id, updatedBook }: PutTypes) => {
       const response = await fetch(`${API}/books/${id}`, {
         method: "PUT",
@@ -25,8 +31,9 @@ export default function useUpdateBook() {
 
   return {
     mutate,
-    isLoading,
-    isError,
-    isSuccess,
+    updateIsLoading,
+    updateIsError,
+    updateIsSuccess,
+    error,
   };
 }
