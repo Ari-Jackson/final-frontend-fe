@@ -6,14 +6,14 @@ export default function NavBar() {
     <>
       <nav className="absolute top-0 z-50 flex h-14 w-screen justify-between bg-pink-400 px-5">
         <div className="flex space-x-5">
-          <AiOutlineMenu className=" my-auto h-full text-3xl text-zinc-50 sm:hover:text-pink-100" />
+          <AiOutlineMenu className=" my-auto h-full text-3xl text-zinc-50 lg:hover:text-pink-100" />
 
           <Link to="/books">
-            <AiFillHome className=" my-auto h-full text-3xl text-zinc-50 sm:hover:text-pink-100" />
+            <AiFillHome className=" my-auto h-full text-3xl text-zinc-50 lg:hover:text-pink-100" />
           </Link>
         </div>
         <Link to="/books/new">
-          <AiOutlinePlus className=" my-auto h-full text-3xl text-zinc-50 sm:hover:text-pink-100" />
+          <AiOutlinePlus className="my-auto h-full w-full text-3xl text-zinc-50 lg:hover:text-pink-100" />
         </Link>
       </nav>
     </>

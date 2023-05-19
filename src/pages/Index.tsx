@@ -15,19 +15,19 @@ export default function Index() {
   }
   return (
     <>
-      <div className="mb-5 items-start justify-between border-b py-4 md:flex">
+      <div className="mb-5 flex items-start justify-between border-b py-4">
         <div>
           <h3 className="text-2xl font-bold text-gray-800">Index</h3>
         </div>
-        <div className="mt-6 items-center gap-x-3 sm:flex md:mt-0">
+        <div className="mt-0 flex items-center gap-x-3">
           <FilterButton />
         </div>
       </div>
-      <div className="-m-4 flex flex-wrap">
+      <div className=" flex flex-wrap">
         {books.map((book: any) => (
           <div
             key={book.id}
-            className="rounded-md p-2 duration-100 hover:bg-gray-50 lg:w-1/3"
+            className=" rounded-md p-2 duration-100 hover:bg-gray-50 lg:w-1/3"
           >
             <Link to={`${book.id}`}>
               <div className="flex h-full flex-col items-center justify-center text-center sm:flex-row sm:justify-start sm:text-left">

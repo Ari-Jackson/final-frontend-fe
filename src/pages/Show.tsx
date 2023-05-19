@@ -5,13 +5,13 @@ import useSingleBook from "../hooks/queries/useSingleBook";
 
 export default function Show() {
   const { id } = useParams();
-  const { isLoading, isError, book } = useSingleBook(id);
+  const { getBookIsLoading, getBookHasError, book } = useSingleBook(id);
 
-  if (isLoading) {
+  if (getBookIsLoading) {
     return <span>Loading...</span>;
   }
 
-  if (isError) {
+  if (getBookHasError) {
     return <span>There was an error</span>;
   }
 
@@ -25,15 +25,15 @@ export default function Show() {
         <div className="mt-6 items-center gap-x-3 sm:flex md:mt-0"></div>
       </div>
       <BreadCrumb title={book.title} />
-      <div className="py-6">
+      <div className=" py-6">
         <div className="mx-auto w-fit px-4 md:px-8">
-          <div className="flex gap-20">
+          <div className="flex w-full flex-col justify-center gap-20 md:flex-row">
             <img
               src="https://dummyimage.com/640x720"
               alt="Photo by Himanshu Dewangan"
-              className="h-full w-1/3 rounded-lg object-cover object-center"
+              className="h-full w-full rounded-lg object-cover object-center md:w-1/3"
             />
-            <div className="w-fit">
+            <div className="w-full md:w-fit">
               <div className="mb-2 md:mb-3">
                 <span className="mb-0.5 inline-block text-gray-500">
                   Rick Rordan
