@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import BookLover from "../components/BookLoverSVG";
+import BookLover from "../assets/BookLoverSVG";
+
 export default function Home() {
   return (
     <section className="mx-auto flex max-w-screen-xl flex-col-reverse items-center px-4 pb-12 md:px-8 lg:mt-16 lg:flex-row lg:space-x-10  lg:space-y-0">
@@ -15,7 +16,7 @@ export default function Home() {
         <div className="items-center justify-start space-y-3 pt-10 sm:flex sm:space-x-6 sm:space-y-0">
           <Link
             to="books"
-            className="block w-full rounded-md bg-pink-400 px-7 py-3 text-center text-white sm:w-auto"
+            className="block w-full rounded-full bg-pink-400 px-7 py-3 text-center text-white sm:w-auto"
           >
             Try it
           </Link>

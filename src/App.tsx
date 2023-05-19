@@ -7,7 +7,7 @@ import Show from "./pages/Show";
 import Edit from "./pages/Edit";
 import PageWrapper from "./components/global/PageWrapper";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import PageNotFound from "./pages/PageNotFound";
+import PageNotFound from "./pages/global/PageNotFound";
 
 const queryClient = new QueryClient();
 
