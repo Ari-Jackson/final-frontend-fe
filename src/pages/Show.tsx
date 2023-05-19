@@ -1,11 +1,14 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BsFillBookmarkCheckFill, BsChatHeart } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import useSingleBook from "../hooks/queries/useSingleBook";
+import useDeleteBook from "../hooks/mutations/useDeleteBook";
 
 export default function Show() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const { getBookIsLoading, getBookHasError, book } = useSingleBook(id);
+  const { mutate, deleteIsSuccess } = useDeleteBook();
 
   if (getBookIsLoading) {
     return <span>Loading...</span>;
@@ -15,7 +18,14 @@ export default function Show() {
     return <span>There was an error</span>;
   }
 
-  console.log(book);
+  const handleDelte = () => {
+    mutate(id);
+  };
+
+  if (deleteIsSuccess) {
+    navigate("/books");
+  }
+
   return (
     <>
       <div className="mb-5 items-start justify-between border-b py-4 md:flex ">
@@ -51,7 +61,10 @@ export default function Show() {
                 </div>
               </div>
               <div className="flex gap-2.5">
-                <button className="inline-block flex-1 rounded-lg bg-gray-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-500 focus-visible:ring active:bg-red-500 sm:flex-none md:text-base">
+                <button
+                  onClick={handleDelte}
+                  className="inline-block flex-1 rounded-lg bg-gray-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-500 focus-visible:ring active:bg-red-500 sm:flex-none md:text-base"
+                >
                   Delete
                 </button>
                 <Link

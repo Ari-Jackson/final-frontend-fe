@@ -1,10 +1,15 @@
 import { useMutation } from "@tanstack/react-query";
 
-export default function useSingleBook(id: string | undefined) {
+export default function useDeleteBook() {
   const API = import.meta.env.VITE_API_URL;
 
-  const { mutate, isLoading, isError, isSuccess } = useMutation({
-    mutationFn: async () => {
+  const {
+    mutate,
+    isLoading: deleteIsLoading,
+    isError: deleteIsError,
+    isSuccess: deleteIsSuccess,
+  } = useMutation({
+    mutationFn: async (id: string | undefined) => {
       const response = await fetch(`${API}/books/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -18,8 +23,8 @@ export default function useSingleBook(id: string | undefined) {
 
   return {
     mutate,
-    isLoading,
-    isError,
-    isSuccess,
+    deleteIsLoading,
+    deleteIsError,
+    deleteIsSuccess,
   };
 }
