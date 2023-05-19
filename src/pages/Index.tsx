@@ -2,17 +2,30 @@ import FilterButton from "../components/FilterButton";
 import { Link } from "react-router-dom";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import useAllBooks from "../hooks/queries/useAllBooks";
+import ServerDownPage from "./global/ServerDownPage";
+import LoadingSpinner from "../components/LoadingSpinner";
+
+type bookType = {
+  id: string;
+  title: string;
+  genre: string;
+  rating: number;
+  is_favorite: boolean;
+  is_current_read: boolean;
+  was_completed_before: boolean;
+};
 
 export default function Index() {
   const { isLoading, isError, data: books } = useAllBooks();
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <LoadingSpinner />;
   }
 
   if (isError) {
-    return <span>There was an error</span>;
+    return <ServerDownPage />;
   }
+
   return (
     <>
       <div className="mb-5 flex items-start justify-between border-b py-4">
@@ -24,7 +37,7 @@ export default function Index() {
         </div>
       </div>
       <div className=" flex flex-wrap">
-        {books.map((book: any) => (
+        {books.map((book: bookType) => (
           <div
             key={book.id}
             className=" rounded-md p-2 duration-100 hover:bg-gray-50 lg:w-1/3"

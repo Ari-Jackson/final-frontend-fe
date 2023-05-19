@@ -3,6 +3,8 @@ import { BsFillBookmarkCheckFill, BsChatHeart } from "react-icons/bs";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import useSingleBook from "../hooks/queries/useSingleBook";
 import useDeleteBook from "../hooks/mutations/useDeleteBook";
+import ServerDownPage from "./global/ServerDownPage";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Show() {
   const { id } = useParams();
@@ -11,16 +13,14 @@ export default function Show() {
   const { mutate, deleteIsSuccess } = useDeleteBook();
 
   if (getBookIsLoading) {
-    return <span>Loading...</span>;
+    return <LoadingSpinner />;
   }
 
   if (getBookHasError) {
-    return <span>There was an error</span>;
+    return <ServerDownPage />;
   }
 
-  const handleDelte = () => {
-    mutate(id);
-  };
+  const handleDelte = () => mutate(id);
 
   if (deleteIsSuccess) {
     navigate("/books");

@@ -2,7 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import Form, { Inputs, Outputs } from "../components/Form";
 import useSingleBook from "../hooks/queries/useSingleBook";
 import useUpdateBook from "../hooks/mutations/useUpdateBook";
-import { caseChanger } from "../helper";
+import { caseChanger } from "../utils/caseChanger";
+import ServerDownPage from "./global/ServerDownPage";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Edit() {
   const { id } = useParams();
@@ -18,10 +20,10 @@ export default function Edit() {
   };
 
   if (getBookIsLoading) {
-    return <h1>Loading...</h1>;
+    return <LoadingSpinner />;
   }
   if (getBookHasError) {
-    return <h1>Oh no! There was an error</h1>;
+    return <ServerDownPage />;
   }
   if (updateIsSuccess) {
     navigate(`/books/${id}`);
