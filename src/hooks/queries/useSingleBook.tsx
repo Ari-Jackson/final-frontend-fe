@@ -4,8 +4,8 @@ export default function useSingleBook(id: string | undefined) {
   const API = import.meta.env.VITE_API_URL;
 
   const {
-    isLoading,
-    isError,
+    isLoading: getBookIsLoading,
+    isError: getBookHasError,
     data: book,
   } = useQuery({
     queryKey: ["books", id],
@@ -17,10 +17,9 @@ export default function useSingleBook(id: string | undefined) {
       return response.json();
     },
   });
-
   return {
-    isLoading,
-    isError,
+    getBookIsLoading,
+    getBookHasError,
     book,
   };
 }

@@ -6,14 +6,23 @@ export type Inputs = {
   rating: number;
   isFavorite: boolean;
   isCurrentRead: boolean;
-  hasReadBefore: boolean;
+  wasCompletedBefore: boolean;
+};
+
+export type Outputs = {
+  title: string;
+  genre: string;
+  rating: number;
+  is_favorite: boolean;
+  is_current_read: boolean;
+  was_completed_before: boolean;
 };
 
 export default function Form({
   values,
   onSubmitFunc,
 }: {
-  values: Inputs;
+  values?: Inputs;
   onSubmitFunc: SubmitHandler<Inputs>;
 }) {
   const {
@@ -25,13 +34,15 @@ export default function Form({
       title: "",
       genre: "",
       rating: 0,
-      isFavorite: true,
+      isFavorite: false,
       isCurrentRead: false,
-      hasReadBefore: false,
+      wasCompletedBefore: false,
     },
     values,
   });
-  const onSubmit: SubmitHandler<Inputs> = (data) => onSubmitFunc(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    onSubmitFunc(data);
+  };
 
   return (
     <form
@@ -61,7 +72,7 @@ export default function Form({
         className="w-full rounded border border-solid border-gray-300 px-4
     py-2 text-gray-700"
         placeholder="Rating"
-        {...register("rating", { max: 10, min: 0 })}
+        {...register("rating", { max: 10, min: 0, valueAsNumber: true })}
       />
       <input
         type="checkbox"
@@ -78,12 +89,12 @@ export default function Form({
       <input
         type="checkbox"
         placeholder="Have you read this before?"
-        {...register("hasReadBefore", {})}
+        {...register("wasCompletedBefore", {})}
       />
       <label className="font-medium text-gray-600">Read Before</label>
 
       <input
-        className="text-md mt-4 w-full rounded border bg-green-400 px-6 py-3 font-semibold text-green-100 shadow hover:bg-green-600"
+        className="text-md mt-4 w-full rounded border bg-pink-400 px-6 py-3 font-semibold text-white shadow xl:hover:bg-pink-200 xl:hover:text-pink-400"
         type="submit"
       />
     </form>
