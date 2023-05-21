@@ -12,7 +12,7 @@ export default function Edit() {
   const navigate = useNavigate();
   const { getBookIsLoading, getBookHasError, book } = useSingleBook(id);
 
-  const { mutate, updateIsError, updateIsSuccess, error } = useUpdateBook();
+  const { mutate, updateIsSuccess } = useUpdateBook();
 
   const onSubmit = (updatedBookInfo: Inputs) => {
     const updatedBook = caseChanger(updatedBookInfo, "snakeCase");
@@ -26,11 +26,9 @@ export default function Edit() {
   if (getBookHasError) {
     return <ServerDownPage />;
   }
+
   if (updateIsSuccess) {
     navigate(`/books/${id}`);
-  }
-  if (updateIsError) {
-    console.log(error);
   }
 
   const transformedBook = caseChanger<Outputs>(book, "camelCase");

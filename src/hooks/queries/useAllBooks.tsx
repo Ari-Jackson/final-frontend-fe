@@ -1,11 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchedBookType } from "../../utils/types";
 
-export default function useAllBooks() {
+type useAllBookType = {
+  getBooksIsLoading: boolean;
+  getBooksHasError: boolean;
+  books: fetchedBookType[];
+};
+
+export default function useAllBooks(): useAllBookType {
   const API = import.meta.env.VITE_API_URL;
   const {
-    isLoading,
-    isError,
+    isLoading: getBooksIsLoading,
+    isError: getBooksHasError,
     data: books,
   } = useQuery({
     queryKey: ["books"],
@@ -19,8 +25,8 @@ export default function useAllBooks() {
   });
 
   return {
-    isLoading,
-    isError,
-    data: books,
+    getBooksIsLoading,
+    getBooksHasError,
+    books,
   };
 }

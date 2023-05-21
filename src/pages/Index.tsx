@@ -6,13 +6,13 @@ import ServerDownPage from "./global/ServerDownPage";
 import LoadingSpinner from "../components/LoadingSpinner";
 
 export default function Index() {
-  const { isLoading, isError, data: books } = useAllBooks();
+  const { getBooksIsLoading, getBooksHasError, books } = useAllBooks();
 
-  if (isLoading) {
+  if (getBooksIsLoading) {
     return <LoadingSpinner />;
   }
 
-  if (isError) {
+  if (getBooksHasError) {
     return <ServerDownPage />;
   }
 
@@ -27,7 +27,7 @@ export default function Index() {
         </div>
       </div>
       <div className=" flex flex-wrap">
-        {books.map((book: bookType) => (
+        {books.map((book) => (
           <div
             key={book.id}
             className=" rounded-md p-2 duration-100 hover:bg-gray-50 lg:w-1/3"

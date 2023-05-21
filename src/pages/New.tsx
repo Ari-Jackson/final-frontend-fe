@@ -5,7 +5,7 @@ import { caseChanger } from "../utils/caseChanger";
 import useCreateBook from "../hooks/mutations/useCreateBook";
 
 export default function New() {
-  const { mutate, isSuccess, isError, error } = useCreateBook();
+  const { mutate, createIsSuccess } = useCreateBook();
   const navigator = useNavigate();
   const onSubmit = (updatedBookInfo: Inputs) => {
     const updatedBook = caseChanger(updatedBookInfo, "snakeCase");
@@ -13,11 +13,8 @@ export default function New() {
     return updatedBook;
   };
 
-  if (isSuccess) {
-    navigator(`/books/`);
-  }
-  if (isError) {
-    console.log(error);
+  if (createIsSuccess) {
+    navigator(`/books`);
   }
 
   return (

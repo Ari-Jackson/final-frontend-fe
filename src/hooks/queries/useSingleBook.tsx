@@ -1,7 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchedBookType } from "../../utils/types";
 
-export default function useSingleBook(id: string | undefined) {
+type useSingleBookType = {
+  getBookIsLoading: boolean;
+  getBookHasError: boolean;
+  book: fetchedBookType;
+};
+
+export default function useSingleBook(
+  id: string | undefined
+): useSingleBookType {
   const API = import.meta.env.VITE_API_URL;
 
   const {
