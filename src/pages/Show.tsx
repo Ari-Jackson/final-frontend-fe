@@ -1,10 +1,13 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { BsFillBookmarkCheckFill, BsChatHeart } from "react-icons/bs";
-import { AiOutlineUnorderedList } from "react-icons/ai";
+import { BsFillBookmarkCheckFill, BsRepeat } from "react-icons/bs";
+import { SlBookOpen } from "react-icons/sl";
 import useSingleBook from "../hooks/queries/useSingleBook";
 import useDeleteBook from "../hooks/mutations/useDeleteBook";
 import ServerDownPage from "./global/ServerDownPage";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/radix/LoadingSpinner";
+import { cn } from "../utils/cn";
+import Tooltip from "../components/radix/ToolTip";
+import DeleteButton from "../components/radix/DeleteButton";
 
 export default function Show() {
   const { id } = useParams();
@@ -54,22 +57,75 @@ export default function Show() {
               </div>
               <RatingSection rating={book.rating} />
               <div className="mb-8 md:mb-10">
-                <div className="flex gap-3">
-                  <BsFillBookmarkCheckFill className="h-10 w-12 items-center justify-center bg-white fill-green-500 text-center text-gray-800 transition duration-100 " />
-                  <BsChatHeart className="h-10 w-12 items-center justify-center bg-white fill-red-500 text-center text-gray-800 transition duration-100" />
-                  <AiOutlineUnorderedList className="h-10 w-12 items-center justify-center bg-white fill-sky-500 text-center text-gray-800 transition duration-100" />
+                <div className="flex flex-col justify-start gap-3 xl:flex-row">
+                  <div className="flex items-center space-x-3">
+                    <Tooltip
+                      text={`This book ${
+                        !book.is_favorite ? "is not" : "is"
+                      } a favorite`}
+                    >
+                      <BsFillBookmarkCheckFill
+                        className={cn(
+                          "h-10 w-12 items-center justify-center bg-white  text-center text-gray-800 transition duration-100 hover:cursor-pointer",
+                          book.is_favorite ? "fill-green-500" : "fill-gray-200"
+                        )}
+                      />
+                    </Tooltip>
+                    <p className="xl:hidden">
+                      This book is {!book.is_favorite && "not"} a favorite
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Tooltip
+                      text={`This book ${
+                        !book.is_current_read ? "is not" : "is"
+                      } a current read`}
+                    >
+                      <SlBookOpen
+                        className={cn(
+                          "h-10 w-12 items-center justify-center bg-white fill-red-500 text-center text-gray-800 transition duration-100 hover:cursor-pointer",
+                          book.is_current_read
+                            ? "fill-red-500"
+                            : "fill-gray-200"
+                        )}
+                      />
+                    </Tooltip>
+                    <p className="xl:hidden">
+                      This book is {!book.is_current_read && "not"} a current
+                      read
+                    </p>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Tooltip
+                      text={`You ${
+                        !book.was_completed_before ? "have not" : "have"
+                      } read this book before.`}
+                    >
+                      <BsRepeat
+                        className={cn(
+                          " h-10 w-12 items-center justify-center bg-white fill-red-500 text-center text-gray-800 transition duration-100 hover:cursor-pointer",
+                          book.was_completed_before
+                            ? "fill-orange-500"
+                            : "fill-gray-200"
+                        )}
+                      />
+                    </Tooltip>
+                    <p className="whitespace-pre-line xl:hidden">
+                      You have {!book.was_completed_before && "not"} read this
+                      book before.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="flex gap-2.5">
-                <button
-                  onClick={handleDelte}
-                  className="inline-block flex-1 rounded-lg bg-gray-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-500 focus-visible:ring active:bg-red-500 sm:flex-none md:text-base"
-                >
-                  Delete
-                </button>
+                <DeleteButton handleDelete={handleDelte}>
+                  <button className="inline-block flex-1 rounded-lg bg-gray-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-500 focus-visible:ring active:bg-red-500 sm:flex-none md:text-base">
+                    Delete
+                  </button>
+                </DeleteButton>
                 <Link
                   to="edit"
-                  className="inline-block flex-1 rounded-lg bg-pink-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-300 transition duration-100 sm:flex-none md:text-base"
+                  className="inline-block flex-1 rounded-lg bg-pink-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-300 transition duration-100 hover:bg-pink-500 sm:flex-none md:text-base"
                 >
                   Edit
                 </Link>
@@ -126,7 +182,7 @@ const BreadCrumb = ({ title }: { title: string }) => {
   );
 };
 
-const RatingSection = ({ rating }: { rating: string }) => {
+const RatingSection = ({ rating }: { rating: number }) => {
   return (
     <div className="mb-4 flex items-center md:mb-6">
       <div className="-ml-1 flex gap-0.5">

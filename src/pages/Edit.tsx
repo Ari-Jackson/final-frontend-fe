@@ -5,7 +5,7 @@ import useSingleBook from "../hooks/queries/useSingleBook";
 import useUpdateBook from "../hooks/mutations/useUpdateBook";
 import { caseChanger } from "../utils/caseChanger";
 import ServerDownPage from "./global/ServerDownPage";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/radix/LoadingSpinner";
 
 export default function Edit() {
   const { id } = useParams();

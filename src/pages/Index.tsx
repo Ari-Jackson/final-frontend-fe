@@ -1,9 +1,9 @@
-import FilterButton from "../components/FilterButton";
+import FilterButton from "../components/radix/FilterButton";
 import { Link } from "react-router-dom";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import useAllBooks from "../hooks/queries/useAllBooks";
 import ServerDownPage from "./global/ServerDownPage";
-import LoadingSpinner from "../components/LoadingSpinner";
+import LoadingSpinner from "../components/radix/LoadingSpinner";
 
 export default function Index() {
   const { getBooksIsLoading, getBooksHasError, books } = useAllBooks();
