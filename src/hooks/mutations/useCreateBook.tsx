@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { type Outputs } from "../../components/Form";
+import { type Outputs } from "../../utils/types";
 
 export default function useCreateBook() {
   const API = import.meta.env.VITE_API_URL;

@@ -5,16 +5,6 @@ import useAllBooks from "../hooks/queries/useAllBooks";
 import ServerDownPage from "./global/ServerDownPage";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-type bookType = {
-  id: string;
-  title: string;
-  genre: string;
-  rating: number;
-  is_favorite: boolean;
-  is_current_read: boolean;
-  was_completed_before: boolean;
-};
-
 export default function Index() {
   const { isLoading, isError, data: books } = useAllBooks();
 

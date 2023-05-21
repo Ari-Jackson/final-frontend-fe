@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Form, { Inputs } from "../components/Form";
+import Form from "../components/Form";
+import { Inputs } from "../utils/types";
 import { caseChanger } from "../utils/caseChanger";
 import useCreateBook from "../hooks/mutations/useCreateBook";
 

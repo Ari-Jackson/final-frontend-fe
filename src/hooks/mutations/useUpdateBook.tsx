@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { Outputs } from "../../components/Form";
+import { Outputs } from "../../utils/types";
 
 type PutTypes = {
   id: string | undefined;

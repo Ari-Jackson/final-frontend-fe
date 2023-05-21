@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Form, { Inputs, Outputs } from "../components/Form";
+import Form from "../components/Form";
+import { Inputs, Outputs } from "../utils/types";
 import useSingleBook from "../hooks/queries/useSingleBook";
 import useUpdateBook from "../hooks/mutations/useUpdateBook";
 import { caseChanger } from "../utils/caseChanger";

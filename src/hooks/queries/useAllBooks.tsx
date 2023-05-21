@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { fetchedBookType } from "../../utils/types";
 
 export default function useAllBooks() {
   const API = import.meta.env.VITE_API_URL;

@@ -1,22 +1,5 @@
 import { useForm, type SubmitHandler } from "react-hook-form";
-
-export type Inputs = {
-  title: string;
-  genre: string;
-  rating: number;
-  isFavorite: boolean;
-  isCurrentRead: boolean;
-  wasCompletedBefore: boolean;
-};
-
-export type Outputs = {
-  title: string;
-  genre: string;
-  rating: number;
-  is_favorite: boolean;
-  is_current_read: boolean;
-  was_completed_before: boolean;
-};
+import { Inputs } from "../utils/types";
 
 export default function Form({
   values,
