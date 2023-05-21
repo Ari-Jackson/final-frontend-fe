@@ -13,7 +13,7 @@ export default function NavBar() {
           </Link>
         </div>
         <Link to="/books/new">
-          <AiOutlinePlus className="my-auto h-full w-full text-3xl text-zinc-50 lg:hover:text-pink-100" />
+          <AiOutlinePlus className="my-auto h-full text-3xl text-zinc-50 lg:hover:text-pink-100" />
         </Link>
       </nav>
     </>
