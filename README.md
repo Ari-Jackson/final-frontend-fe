@@ -1,7 +1,8 @@
 # Welcome to The Shelf 
 
-[Deployment Link Coming Soon]()
-
+[FrontEnd Deployment](https://the-shelf.vercel.app/)
+[Backend Deployment](https://dashboard.render.com/web/srv-chi1c1bhp8u7g2davhgg)
+[Trello Board](https://trello.com/b/CBkM3xrq/%F0%9F%93%96-the-shelf-%F0%9F%93%96)
 ##  Project Description
 Coming soon...
 
@@ -13,9 +14,14 @@ The Table Potluck App leverages the following technologies and frameworks:
 - TanStack Query
 - Typescript
 - Tailwind CSS
+- React Hook Forms
 - React Icons
 - Radix
 - Vite
+- Zod
+- Change case
+- Undraw for svgs
+- Probably more that I can't remember
 
 
 ## Installing this repo
