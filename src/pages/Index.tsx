@@ -1,4 +1,4 @@
-import FilterButton from "../components/radix/FilterButton";
+// import FilterButton from "../components/radix/FilterButton";
 import { Link } from "react-router-dom";
 import { BsFillSuitHeartFill } from "react-icons/bs";
 import useAllBooks from "../hooks/queries/useAllBooks";
@@ -23,7 +23,7 @@ export default function Index() {
           <h3 className="text-2xl font-bold text-gray-800">Index</h3>
         </div>
         <div className="mt-0 flex items-center gap-x-3">
-          <FilterButton />
+          {/* <FilterButton /> */}
         </div>
       </div>
       <div className=" flex flex-wrap">
