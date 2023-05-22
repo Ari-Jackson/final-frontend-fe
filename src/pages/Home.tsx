@@ -15,7 +15,7 @@ export default function Home() {
         </p>
         <div className="items-center justify-start space-y-3 pt-10 sm:flex sm:space-x-6 sm:space-y-0">
           <Link
-            to="books"
+            to="/books"
             className="block w-full rounded-full bg-pink-400 px-7 py-3 text-center text-white sm:w-auto"
           >
             Try it

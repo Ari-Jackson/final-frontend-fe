@@ -124,7 +124,7 @@ export default function Show() {
                   </button>
                 </DeleteButton>
                 <Link
-                  to="edit"
+                  to={`/books/${id}/edit`}
                   className="inline-block flex-1 rounded-lg bg-pink-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-300 transition duration-100 hover:bg-pink-500 sm:flex-none md:text-base"
                 >
                   Edit

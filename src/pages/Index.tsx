@@ -32,7 +32,7 @@ export default function Index() {
             key={book.id}
             className=" rounded-md p-2 duration-100 hover:bg-gray-50 lg:w-1/3"
           >
-            <Link to={`${book.id}`}>
+            <Link to={`/books/${book.id}`}>
               <div className="flex h-full flex-col items-center justify-center text-center sm:flex-row sm:justify-start sm:text-left">
                 <div className="relative">
                   <img
