@@ -1,5 +1,5 @@
 import { camelCase, snakeCase } from "change-case";
-import { type Inputs, type Outputs } from "../components/Form";
+import { type Inputs, type Outputs } from "./types";
 
 export function caseChanger<T extends Inputs | Outputs>(
   args: T,
