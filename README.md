@@ -7,7 +7,7 @@
 Coming soon...
 
 ##  Technologies Used
-The Table Potluck App leverages the following technologies and frameworks:
+The Shelf leverages the following technologies and frameworks:
 
 - React.js
 - React Router
