@@ -1,6 +1,6 @@
 # Welcome to The Shelf 
 
-[Frontend Deployment](https://the-shelf.vercel.app/)
+[Frontend Deployment](https://the-shelf-ari-jackson.netlify.app/)
 
 [Backend Deployment](https://dashboard.render.com/web/srv-chi1c1bhp8u7g2davhgg)
 
