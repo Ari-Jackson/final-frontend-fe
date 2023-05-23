@@ -7,7 +7,7 @@
 [Trello Board](https://trello.com/b/CBkM3xrq/%F0%9F%93%96-the-shelf-%F0%9F%93%96)
 
 ##  Project Description
-Coming soon...
+The shelf is a book tracking app inspired by the readers I know, and the problems they run into when keeping track of book
 
 ##  Technologies Used
 The Shelf leverages the following technologies and frameworks:
