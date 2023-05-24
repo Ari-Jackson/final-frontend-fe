@@ -48,7 +48,7 @@ export default function Show() {
                 <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
                   {book.title}
                 </h2>
-                <span className="mb-0.5 inline-block text-gray-500">
+                <span className="mb-3 inline-block text-gray-500">
                   {book.authors}
                 </span>
                 <RatingSection rating={book.rating} />
@@ -100,7 +100,7 @@ export default function Show() {
                   {book.title}
                 </h2>
               </div>
-              <div className=" hidden">
+              <div className="hidden md:block">
                 <RatingSection rating={book.rating} />
               </div>
               <div className="mb-8 md:mb-10">
