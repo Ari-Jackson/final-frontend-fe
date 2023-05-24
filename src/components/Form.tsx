@@ -106,7 +106,6 @@ export default function Form({
             <input
               type="checkbox"
               id="readBefore"
-              placeholder="Have you read this before?"
               className=""
               {...register("wasCompletedBefore", {})}
             />
@@ -150,6 +149,10 @@ export default function Form({
   );
 }
 
+type GoogleSearchInputs = {
+  search: string;
+};
+
 const GoogleBookSearch = ({
   setValue,
   googleBooksForm,
@@ -157,10 +160,13 @@ const GoogleBookSearch = ({
   setValue: UseFormSetValue<Inputs>;
   googleBooksForm: Inputs;
 }) => {
-  const [inputValue, setInputValue] = useState("");
   const [submittedValue, setSubmittedValue] = useState("");
-
-  //
+  const { register, handleSubmit, reset, watch } = useForm<GoogleSearchInputs>({
+    defaultValues: {
+      search: "",
+    },
+  });
+  const { search } = watch();
   const [selectedBook, setSelectedBook] = useState({
     googleBooksId: "",
     title: "",
@@ -172,40 +178,48 @@ const GoogleBookSearch = ({
   });
   const { googleBooks, googleBooksIsLoading } = useGoogleBooks(submittedValue);
 
-  const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmittedValue(inputValue);
-    setInputValue("");
+  const submitHandler = (data: GoogleSearchInputs) => {
+    setSubmittedValue(data.search);
+    reset(() => ({
+      search: "",
+    }));
   };
 
-  const handleSubmit = () => {
+  const handleNext = () => {
     setValue("googleBooksId", selectedBook.googleBooksId);
     setValue("title", selectedBook.title);
-    setValue("categories", selectedBook.categories);
-    setValue("authors", selectedBook.authors);
-    setValue("description", selectedBook.description);
-    setValue("pageCount", selectedBook.pageCount);
-    setValue("imageLink", selectedBook.imageLink);
+    setValue(
+      "categories",
+      selectedBook.categories ? selectedBook.categories : ""
+    );
+    setValue("authors", selectedBook.authors ? selectedBook.authors : "");
+    setValue(
+      "description",
+      selectedBook.description ? selectedBook.description : ""
+    );
+    setValue("pageCount", selectedBook.pageCount ? selectedBook.pageCount : 1);
+    setValue("imageLink", selectedBook.imageLink ? selectedBook.imageLink : "");
   };
 
   return (
     <>
       <div className={cn(googleBooksForm.googleBooksId && "hidden")}>
         <form
-          onSubmit={submitHandler}
+          onSubmit={handleSubmit(submitHandler)}
           className="flex items-center justify-center"
         >
           <input
             type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
+            // value={inputValue}
+            // onChange={(e) => setInputValue(e.target.value)}
+            {...register("search")}
             className="w-full rounded border border-solid border-gray-300 px-4 py-2 text-gray-700"
           />
           <input
             disabled={
               googleBooksIsLoading ||
-              inputValue === "" ||
-              (submittedValue === inputValue && submittedValue !== "")
+              search === "" ||
+              (submittedValue === search && submittedValue !== "")
             }
             className=" ml-5 rounded-md bg-pink-400 p-2 text-white hover:cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-300"
             type="submit"
@@ -255,7 +269,7 @@ const GoogleBookSearch = ({
         {googleBooks && (
           <button
             disabled={!selectedBook.googleBooksId}
-            onClick={handleSubmit}
+            onClick={() => handleNext()}
             className=" text-md mt-4 w-fit rounded border bg-pink-400 px-6 py-3 font-semibold text-white shadow disabled:cursor-not-allowed disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:hover:text-white xl:hover:bg-pink-200 xl:hover:text-pink-400"
           >
             Next
