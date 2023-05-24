@@ -131,6 +131,11 @@ export default function Form({
                     valueAsNumber: true,
                   })}
                 />
+                {errors.numberOfCompletions && (
+                  <div className="text-normal mb-3 text-red-500 ">
+                    {errors.numberOfCompletions.message}
+                  </div>
+                )}
               </>
             )}
           </div>
