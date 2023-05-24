@@ -1,13 +1,13 @@
 # Welcome to The Shelf 
 
-[Frontend Deployment](https://the-shelf.vercel.app/)
+[Frontend Deployment](https://the-shelf-ari-jackson.netlify.app/)
 
 [Backend Deployment](https://dashboard.render.com/web/srv-chi1c1bhp8u7g2davhgg)
 
 [Trello Board](https://trello.com/b/CBkM3xrq/%F0%9F%93%96-the-shelf-%F0%9F%93%96)
 
 ##  Project Description
-Coming soon...
+The shelf is a book tracking app inspired by the readers I know, and the problems they run into when keeping track of book
 
 ##  Technologies Used
 The Shelf leverages the following technologies and frameworks:
