@@ -1,8 +1,9 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { type Outputs } from "../../utils/types";
 
 export default function useCreateBook() {
   const API = import.meta.env.VITE_API_URL;
+  const queryClient = useQueryClient();
 
   const {
     mutate,
@@ -21,6 +22,9 @@ export default function useCreateBook() {
         throw new Error("Network response was not ok");
       }
       return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["books"] });
     },
   });
 

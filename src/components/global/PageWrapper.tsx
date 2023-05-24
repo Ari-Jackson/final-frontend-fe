@@ -9,7 +9,7 @@ export default function PageWrapper({ children }: AppProps) {
     <>
       <div className="relative h-full min-h-screen">
         <NavBar />
-        <main className="px-4 pb-20 pt-20 sm:px-16">
+        <main className="px-4 pb-20 pt-20 font-hand-writing text-lg tracking-wider sm:px-16">
           <div className=" mx-auto max-w-screen-2xl px-4 md:px-8">
             {children}
           </div>

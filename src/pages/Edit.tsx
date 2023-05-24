@@ -32,6 +32,7 @@ export default function Edit() {
   }
 
   const transformedBook = caseChanger<Outputs>(book, "camelCase");
+  console.log(transformedBook);
   return (
     <>
       <div className="mb-5 items-start justify-between border-b py-4 md:flex">

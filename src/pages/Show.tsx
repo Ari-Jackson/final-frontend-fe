@@ -8,12 +8,14 @@ import LoadingSpinner from "../components/radix/LoadingSpinner";
 import { cn } from "../utils/cn";
 import Tooltip from "../components/radix/ToolTip";
 import DeleteButton from "../components/radix/DeleteButton";
+import { useState } from "react";
 
 export default function Show() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getBookIsLoading, getBookHasError, book } = useSingleBook(id);
   const { mutate, deleteIsSuccess } = useDeleteBook();
+  const [isOpen, setIsOpen] = useState(false);
 
   if (getBookIsLoading) {
     return <LoadingSpinner />;
@@ -40,24 +42,69 @@ export default function Show() {
       <BreadCrumb title={book.title} />
       <div className=" py-6">
         <div className="mx-auto w-fit px-4 md:px-8">
-          <div className="flex w-full flex-col justify-center gap-20 md:flex-row">
-            <img
-              src="https://dummyimage.com/640x720"
-              alt="Photo by Himanshu Dewangan"
-              className="h-full w-full rounded-lg object-cover object-center md:w-1/3"
-            />
-            <div className="w-full md:w-fit">
-              <div className="mb-2 md:mb-3">
+          <div className="flex w-full flex-col justify-start gap-5 md:flex-row md:gap-20">
+            <div className="flex w-80 flex-shrink flex-col rounded-lg md:w-96">
+              <div className="mb-2 block md:mb-3 md:hidden">
+                <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
+                  {book.title}
+                </h2>
                 <span className="mb-0.5 inline-block text-gray-500">
-                  Rick Rordan
+                  {book.authors}
+                </span>
+                <RatingSection rating={book.rating} />
+              </div>
+              <img
+                src={book.image_link}
+                alt="Photo by Himanshu Dewangan"
+                className="mb-5 w-1/2 self-center rounded-lg object-cover object-center"
+              />
+              <div>
+                <p
+                  className={cn(
+                    "h-20 w-full overflow-hidden text-ellipsis font-official-serif duration-150",
+                    isOpen && "h-fit overflow-visible"
+                  )}
+                >
+                  Description: {book.description}
+                </p>
+                <p
+                  className={cn(
+                    "font-official-serif text-gray-500",
+                    !isOpen && "hidden"
+                  )}
+                >
+                  Genres: {book.categories}
+                </p>
+                <h1
+                  className={cn(
+                    "font-official-serif text-gray-500",
+                    !isOpen && "hidden"
+                  )}
+                >
+                  Pages: {book.page_count} pages
+                </h1>
+              </div>
+              <p
+                className="text-pink-400"
+                onClick={() => setIsOpen((isOpen) => !isOpen)}
+              >
+                {isOpen ? "See less" : "See more"}
+              </p>
+            </div>
+            <div className="w-full flex-grow">
+              <div className="hidden md:mb-3 md:block">
+                <span className="mb-0.5 inline-block text-gray-500">
+                  {book.authors}
                 </span>
                 <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
                   {book.title}
                 </h2>
               </div>
-              <RatingSection rating={book.rating} />
+              <div className=" hidden">
+                <RatingSection rating={book.rating} />
+              </div>
               <div className="mb-8 md:mb-10">
-                <div className="flex flex-col justify-start gap-3 xl:flex-row">
+                <div className="mt-5 flex flex-col justify-start gap-3 xl:flex-row">
                   <div className="flex items-center space-x-3">
                     <Tooltip
                       text={`This book ${
@@ -98,8 +145,10 @@ export default function Show() {
                   <div className="flex items-center space-x-3">
                     <Tooltip
                       text={`You ${
-                        !book.was_completed_before ? "have not" : "have"
-                      } read this book before.`}
+                        !book.was_completed_before
+                          ? "have not read this book before"
+                          : `have read this book ${book.number_of_completions} times`
+                      }`}
                     >
                       <BsRepeat
                         className={cn(
@@ -112,7 +161,10 @@ export default function Show() {
                     </Tooltip>
                     <p className="whitespace-pre-line xl:hidden">
                       You have {!book.was_completed_before && "not"} read this
-                      book before.
+                      book before
+                      {book.was_completed_before &&
+                        ` ${book.number_of_completions} times`}
+                      .
                     </p>
                   </div>
                 </div>
@@ -214,7 +266,7 @@ const RatingSection = ({ rating }: { rating: number }) => {
   return (
     <div className="mb-5 flex">
       {starRating}
-      {rating}
+      <h4 className="ml-2">{rating}</h4>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { type Inputs, type Outputs } from "./types";
 
 export function caseChanger<T extends Inputs | Outputs>(
   args: T,
-  endingType?: "camelCase" | "snakeCase"
+  endingType: "camelCase" | "snakeCase"
 ): T extends Inputs ? Outputs : Inputs {
   const mapped = Object.entries(args).map((keyValue) => [
     endingType === "camelCase"
