@@ -40,7 +40,7 @@ export default function Form({
     mode: "all",
   });
 
-  const googleBooksForm = watch();
+  const bookInfo = watch();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     onSubmitFunc(data);
@@ -48,23 +48,23 @@ export default function Form({
 
   return (
     <div className="m-auto mt-10 w-full max-w-5xl border px-10 py-10">
-      <GoogleBookSearch setValue={setValue} googleBooksForm={googleBooksForm} />
+      <GoogleBookSearch setValue={setValue} bookInfo={bookInfo} />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={cn(!googleBooksForm.googleBooksId && "hidden")}
+        className={cn(!bookInfo.googleBooksId && "hidden")}
       >
         <div className="flex">
           <img
             src={
-              !googleBooksForm.imageLink
+              !bookInfo.imageLink
                 ? "https://dummyimage.com/400x600/969696/dbdbdb"
-                : googleBooksForm.imageLink
+                : bookInfo.imageLink
             }
             className="mr-5 h-80 w-auto"
           />
           <div>
-            <h1 className="text-xl font-semibold">{googleBooksForm.title}</h1>
-            <h1 className="text-lg">{googleBooksForm.authors}</h1>
+            <h1 className="text-xl font-semibold">{bookInfo.title}</h1>
+            <h1 className="text-lg">{bookInfo.authors}</h1>
             <label className="font-medium text-gray-600">My Rating</label>
             <input
               type="number"
@@ -106,11 +106,16 @@ export default function Form({
             <input
               type="checkbox"
               id="readBefore"
-              className=""
-              {...register("wasCompletedBefore", {})}
+              {...register("wasCompletedBefore", {
+                onChange: (e) => {
+                  if (!e.target.checked) {
+                    setValue("numberOfCompletions", 0);
+                  }
+                },
+              })}
             />
 
-            {googleBooksForm.wasCompletedBefore && (
+            {bookInfo.wasCompletedBefore && (
               <>
                 <label
                   htmlFor="numberOfCompletions"
@@ -155,10 +160,10 @@ type GoogleSearchInputs = {
 
 const GoogleBookSearch = ({
   setValue,
-  googleBooksForm,
+  bookInfo,
 }: {
   setValue: UseFormSetValue<Inputs>;
-  googleBooksForm: Inputs;
+  bookInfo: Inputs;
 }) => {
   const [submittedValue, setSubmittedValue] = useState("");
   const { register, handleSubmit, reset, watch } = useForm<GoogleSearchInputs>({
@@ -203,15 +208,13 @@ const GoogleBookSearch = ({
 
   return (
     <>
-      <div className={cn(googleBooksForm.googleBooksId && "hidden")}>
+      <div className={cn(bookInfo.googleBooksId && "hidden")}>
         <form
           onSubmit={handleSubmit(submitHandler)}
           className="flex items-center justify-center"
         >
           <input
             type="text"
-            // value={inputValue}
-            // onChange={(e) => setInputValue(e.target.value)}
             {...register("search")}
             className="w-full rounded border border-solid border-gray-300 px-4 py-2 text-gray-700"
           />
