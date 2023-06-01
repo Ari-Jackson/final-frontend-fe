@@ -55,8 +55,8 @@ export default function Show() {
               </div>
               <img
                 src={book.image_link}
-                alt="Photo by Himanshu Dewangan"
-                className="mb-5 w-1/2 self-center rounded-lg object-cover object-center"
+                alt={`${book.title} Cover`}
+                className="mb-5 h-auto w-full self-center rounded-lg object-cover object-center"
               />
               <div>
                 <p
