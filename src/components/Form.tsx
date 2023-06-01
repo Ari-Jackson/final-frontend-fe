@@ -6,7 +6,7 @@ import {
 import { Inputs } from "../utils/types";
 import { cn } from "../utils/cn";
 import useGoogleBooks from "../hooks/queries/useGoogleBooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Form({
   values,
@@ -47,25 +47,38 @@ export default function Form({
   };
 
   return (
-    <div className="m-auto mt-10 w-full max-w-5xl border px-10 py-10">
+    <div className="m-auto mt-10 w-full border px-10 py-10">
       <GoogleBookSearch setValue={setValue} bookInfo={bookInfo} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={cn(!bookInfo.googleBooksId && "hidden")}
       >
-        <div className="flex">
-          <img
-            src={
-              !bookInfo.imageLink
-                ? "https://dummyimage.com/400x600/969696/dbdbdb"
-                : bookInfo.imageLink
-            }
-            className="mr-5 h-80 w-auto"
-          />
-          <div>
+        <div className="flex flex-col rounded-md md:flex-row">
+          <div className="relative mr-5">
+            <img
+              src={
+                !bookInfo.imageLink
+                  ? "https://dummyimage.com/400x600/969696/dbdbdb"
+                  : bookInfo.imageLink
+              }
+              className=" h-80 w-auto rounded-md"
+            />
+            <div className="absolute bottom-0 flex h-full w-full justify-center rounded-md bg-pink-400 opacity-0 duration-100 hover:cursor-pointer hover:opacity-70">
+              <button
+                className="text-white"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setValue("googleBooksId", "");
+                }}
+              >
+                Click to reset book details
+              </button>
+            </div>
+          </div>
+          <div className="mx-5 flex-grow">
             <h1 className="text-xl font-semibold">{bookInfo.title}</h1>
-            <h1 className="text-lg">{bookInfo.authors}</h1>
-            <label className="font-medium text-gray-600">My Rating</label>
+            <h1 className="mb-3 text-lg">{bookInfo.authors}</h1>
+            <label className=" font-medium text-gray-600">My Rating</label>
             <input
               type="number"
               className="w-full rounded border border-solid border-gray-300 px-4
@@ -82,39 +95,56 @@ export default function Form({
                 {errors.rating.message}
               </div>
             )}
-            <label htmlFor="favorite" className=" font-medium text-gray-600">
-              Favorite
-            </label>
-            <input
-              type="checkbox"
-              id="favorite"
-              placeholder="Is this a favorite?"
-              {...register("isFavorite", {})}
-            />
-            <label htmlFor="currentRead" className="font-medium text-gray-600">
-              Current Read
-            </label>
-            <input
-              type="checkbox"
-              id="currentRead"
-              placeholder="Is This A current read?"
-              {...register("isCurrentRead", {})}
-            />
-            <label htmlFor="readBefore" className="font-medium text-gray-600">
-              Read Before
-            </label>
-            <input
-              type="checkbox"
-              id="readBefore"
-              {...register("wasCompletedBefore", {
-                onChange: (e) => {
-                  if (!e.target.checked) {
-                    setValue("numberOfCompletions", 0);
-                  }
-                },
-              })}
-            />
+            <div className="my-5 flex justify-between px-20">
+              <div className="space-x-2">
+                <label
+                  htmlFor="favorite"
+                  className=" font-medium text-gray-600"
+                >
+                  Favorite
+                </label>
+                <input
+                  type="checkbox"
+                  id="favorite"
+                  placeholder="Is this a favorite?"
+                  {...register("isFavorite", {})}
+                />
+              </div>
 
+              <div className="space-x-2">
+                <label
+                  htmlFor="currentRead"
+                  className="font-medium text-gray-600"
+                >
+                  Current Read
+                </label>
+                <input
+                  type="checkbox"
+                  id="currentRead"
+                  placeholder="Is This A current read?"
+                  {...register("isCurrentRead", {})}
+                />
+              </div>
+              <div className="space-x-2">
+                <label
+                  htmlFor="readBefore"
+                  className="font-medium text-gray-600"
+                >
+                  Read Before
+                </label>
+                <input
+                  type="checkbox"
+                  id="readBefore"
+                  {...register("wasCompletedBefore", {
+                    onChange: (e) => {
+                      if (!e.target.checked) {
+                        setValue("numberOfCompletions", 0);
+                      }
+                    },
+                  })}
+                />
+              </div>
+            </div>
             {bookInfo.wasCompletedBefore && (
               <>
                 <label
@@ -183,6 +213,12 @@ const GoogleBookSearch = ({
   });
   const { googleBooks, googleBooksIsLoading } = useGoogleBooks(submittedValue);
 
+  useEffect(() => {
+    if (bookInfo.title) {
+      setSubmittedValue(bookInfo.title);
+    }
+  }, [bookInfo.title]);
+
   const submitHandler = (data: GoogleSearchInputs) => {
     setSubmittedValue(data.search);
     reset(() => ({
@@ -191,7 +227,9 @@ const GoogleBookSearch = ({
   };
 
   const handleNext = () => {
-    setValue("googleBooksId", selectedBook.googleBooksId);
+    setValue("googleBooksId", selectedBook.googleBooksId, {
+      shouldDirty: true,
+    });
     setValue("title", selectedBook.title);
     setValue(
       "categories",

@@ -43,8 +43,8 @@ export default function Index() {
                     />
                   </div>
                   {book.is_favorite && (
-                    <span className="absolute right-1 top-2 inline-flex items-center gap-0.5 rounded-full bg-black px-2 py-1 text-xs font-semibold text-white">
-                      <BsFillSuitHeartFill className="fill-pink-200" />
+                    <span className="absolute right-1 top-2 inline-flex items-center gap-0.5 rounded-full bg-white p-1 text-xs font-semibold text-white">
+                      <BsFillSuitHeartFill className="fill-pink-300" />
                     </span>
                   )}
                 </div>
