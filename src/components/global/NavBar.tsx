@@ -20,7 +20,7 @@ export default function NavBar() {
           </Link>
           {isLoaded && userId && (
             <div className="">
-              <UserButton />
+              <UserButton afterSignOutUrl="/" />
             </div>
           )}
           {isLoaded && !userId && (

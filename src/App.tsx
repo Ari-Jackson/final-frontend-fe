@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 
 import Home from "./pages/Home";
 import Index from "./pages/Index";
@@ -18,23 +23,30 @@ const clerkPubKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 const queryClient = new QueryClient();
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route path="/" element={<PageWrapper />}>
+        <Route index element={<Home />} />
+
+        <Route path="books">
+          <Route index element={<Index />} />
+          <Route path="new" element={<New />} />
+          <Route path=":id" element={<Show />} />
+          <Route path=":id/edit" element={<Edit />} />
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </>
+  )
+);
+
 export default function App() {
   return (
     <>
       <ClerkProvider publishableKey={clerkPubKey}>
         <QueryClientProvider client={queryClient}>
-          <Router>
-            <PageWrapper>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/books" element={<Index />} />
-                <Route path="/books/new" element={<New />} />
-                <Route path="/books/:id" element={<Show />} />
-                <Route path="/books/:id/edit" element={<Edit />} />
-                <Route path="*" element={<PageNotFound />} />
-              </Routes>
-            </PageWrapper>
-          </Router>
+          <RouterProvider router={router} />
         </QueryClientProvider>
       </ClerkProvider>
     </>
