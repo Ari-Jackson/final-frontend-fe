@@ -7,15 +7,16 @@ import ServerDownPage from "./global/ServerDownPage";
 import LoadingSpinner from "../components/radix/LoadingSpinner";
 import { cn } from "../utils/cn";
 import Tooltip from "../components/radix/ToolTip";
-import DeleteButton from "../components/radix/DeleteButton";
 import { useState } from "react";
+// import Editor from "../components/Editor/Editor";
+import Settings from "../components/radix/Settings";
 
 export default function Show() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getBookIsLoading, getBookHasError, book } = useSingleBook(id);
   const { mutate, deleteIsSuccess } = useDeleteBook();
-  const [isOpen, setIsOpen] = useState(false);
+  const [descriptionIsOpen, setDescriptionIsOpen] = useState(false);
 
   if (getBookIsLoading) {
     return <LoadingSpinner />;
@@ -25,25 +26,25 @@ export default function Show() {
     return <ServerDownPage />;
   }
 
-  const handleDelte = () => mutate(id);
-
   if (deleteIsSuccess) {
     navigate("/books");
   }
 
   return (
     <>
-      <div className="mb-5 items-start justify-between border-b py-4 md:flex ">
+      <div className="mb-5 items-center justify-between border-b py-4 md:flex ">
         <div>
           <h3 className="text-2xl font-bold text-gray-800">Show</h3>
         </div>
-        <div className="mt-6 items-center gap-x-3 sm:flex md:mt-0"></div>
+        <div className="mt-6 gap-x-3 rounded-md py-2 hover:cursor-pointer sm:flex md:mt-0">
+          <Settings id={id} handleDelete={() => mutate(id)} />
+        </div>
       </div>
       <BreadCrumb title={book.title} />
       <div className=" py-6">
         <div className="mx-auto w-fit px-4 md:px-8">
           <div className="flex w-full flex-col justify-start gap-5 md:flex-row md:gap-20">
-            <div className="flex w-80 flex-shrink flex-col rounded-lg md:w-96">
+            <div className="flex w-fit flex-shrink flex-col rounded-lg md:w-96">
               <div className="mb-2 block md:mb-3 md:hidden">
                 <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
                   {book.title}
@@ -62,7 +63,7 @@ export default function Show() {
                 <p
                   className={cn(
                     "h-20 w-full overflow-hidden text-ellipsis font-official-serif duration-150",
-                    isOpen && "h-fit overflow-visible"
+                    descriptionIsOpen && "h-fit overflow-visible"
                   )}
                 >
                   Description: {book.description}
@@ -70,7 +71,7 @@ export default function Show() {
                 <p
                   className={cn(
                     "font-official-serif text-gray-500",
-                    !isOpen && "hidden"
+                    !descriptionIsOpen && "hidden"
                   )}
                 >
                   Genres: {book.categories}
@@ -78,17 +79,21 @@ export default function Show() {
                 <h1
                   className={cn(
                     "font-official-serif text-gray-500",
-                    !isOpen && "hidden"
+                    !descriptionIsOpen && "hidden"
                   )}
                 >
                   Pages: {book.page_count} pages
                 </h1>
               </div>
               <p
-                className="text-pink-400"
-                onClick={() => setIsOpen((isOpen) => !isOpen)}
+                className="text-pink-400 hover:cursor-pointer"
+                onClick={() =>
+                  setDescriptionIsOpen(
+                    (descriptionIsOpen) => !descriptionIsOpen
+                  )
+                }
               >
-                {isOpen ? "See less" : "See more"}
+                {descriptionIsOpen ? "See less" : "See more"}
               </p>
             </div>
             <div className="w-full flex-grow">
@@ -96,7 +101,7 @@ export default function Show() {
                 <span className="mb-0.5 inline-block text-gray-500">
                   {book.authors}
                 </span>
-                <h2 className="text-2xl font-bold text-gray-800 lg:text-3xl">
+                <h2 className=" min-w-[50rem] text-2xl font-bold text-gray-800 lg:text-3xl">
                   {book.title}
                 </h2>
               </div>
@@ -169,19 +174,12 @@ export default function Show() {
                   </div>
                 </div>
               </div>
-              <div className="flex gap-2.5">
-                <DeleteButton handleDelete={handleDelte}>
-                  <button className="inline-block flex-1 rounded-lg bg-gray-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-red-300 transition duration-100 hover:bg-red-500 focus-visible:ring active:bg-red-500 sm:flex-none md:text-base">
-                    Delete
-                  </button>
-                </DeleteButton>
-                <Link
-                  to={`/books/${id}/edit`}
-                  className="inline-block flex-1 rounded-lg bg-pink-400 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-pink-300 transition duration-100 hover:bg-pink-500 sm:flex-none md:text-base"
-                >
-                  Edit
-                </Link>
-              </div>
+              {/* <div className="mb-3 rounded-md border-2 border-pink-400">
+                <Editor
+                  isEditable={editorIsActive}
+                  review={JSON.parse(book.review)}
+                />
+              </div> */}
             </div>
           </div>
         </div>
