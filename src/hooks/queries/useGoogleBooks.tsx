@@ -20,7 +20,7 @@ export default function useGoogleBooks(
     // isError: googleBooksHasError,
     data: googleBooks,
   } = useQuery({
-    queryKey: ["googleBooks", search],
+    queryKey: ["googleBooks", { search }],
     queryFn: async () => {
       const response = await fetch(
         `${googleBooksAPI}?q=${search}&printType=books&fields=items(id, volumeInfo(title, authors, pageCount, description, imageLinks, categories))&maxResults=12&key=${googleBooksKey}`

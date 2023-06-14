@@ -17,7 +17,7 @@ export default function useSingleBook(
     isError: getBookHasError,
     data: book,
   } = useQuery({
-    queryKey: ["books", id],
+    queryKey: ["books", { id }],
     queryFn: async () => {
       const response = await fetch(`${API}/books/${id}`);
       if (!response.ok) {
