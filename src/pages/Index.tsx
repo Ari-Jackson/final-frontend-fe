@@ -35,7 +35,7 @@ export default function Index() {
             <Link to={`/books/${book.id}`}>
               <div className="flex h-full flex-col items-center justify-center text-center sm:flex-row sm:justify-start sm:text-left">
                 <div className="relative">
-                  <div className="mb-4 h-auto w-24 flex-shrink-0 rounded-md sm:mb-0">
+                  <div className=" mb-4 h-auto min-h-[9rem] w-24 flex-shrink-0 rounded-md bg-gray-300 sm:mb-0">
                     <img
                       alt={`${book.title} Cover`}
                       className="rounded-md"

@@ -10,7 +10,6 @@ export default function New() {
   const onSubmit = (updatedBookInfo: Inputs) => {
     const updatedBook = caseChanger(updatedBookInfo, "snakeCase");
     mutate(updatedBook);
-    return updatedBook;
   };
 
   if (createIsSuccess) {

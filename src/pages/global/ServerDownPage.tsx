@@ -263,8 +263,8 @@ export default function ServerDownPage() {
           Oh no!
         </h1>
         <p className="mt-4 text-gray-500">
-          It seems like we're experiencing an errors with our server. Try again
-          later.
+          It seems like we're experiencing an errors with our server. Please try
+          again later.
         </p>
       </div>
     </>
