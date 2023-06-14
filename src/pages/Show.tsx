@@ -8,7 +8,7 @@ import LoadingSpinner from "../components/radix/LoadingSpinner";
 import { cn } from "../utils/cn";
 import Tooltip from "../components/radix/ToolTip";
 import { useState } from "react";
-// import Editor from "../components/Editor/Editor";
+import Editor from "../components/Editor/Editor";
 import Settings from "../components/radix/Settings";
 
 export default function Show() {
@@ -29,7 +29,6 @@ export default function Show() {
   if (deleteIsSuccess) {
     navigate("/books");
   }
-
   return (
     <>
       <div className="mb-5 items-center justify-between border-b py-4 md:flex ">
@@ -42,7 +41,7 @@ export default function Show() {
       </div>
       <BreadCrumb title={book.title} />
       <div className=" py-6">
-        <div className="mx-auto w-fit px-4 md:px-8">
+        <div className="mx-auto w-full px-4 md:px-8">
           <div className="flex w-full flex-col justify-start gap-5 md:flex-row md:gap-20">
             <div className="flex w-fit flex-shrink flex-col rounded-lg md:w-96">
               <div className="mb-2 block md:mb-3 md:hidden">
@@ -174,12 +173,10 @@ export default function Show() {
                   </div>
                 </div>
               </div>
-              {/* <div className="mb-3 rounded-md border-2 border-pink-400">
-                <Editor
-                  isEditable={editorIsActive}
-                  review={JSON.parse(book.review)}
-                />
-              </div> */}
+              <h2 className=" mb-4 text-3xl">Book Notes</h2>
+              <div className="mb-3 rounded-md border-2 border-pink-400">
+                <Editor review={book.review} />
+              </div>
             </div>
           </div>
         </div>

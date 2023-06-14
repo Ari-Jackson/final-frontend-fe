@@ -12,6 +12,7 @@ export type fetchedBookType = {
   page_count: number;
   image_link: string;
   number_of_completions: number;
+  review: string;
 };
 
 export type Inputs = {
@@ -42,6 +43,10 @@ export type Outputs = {
   page_count: number;
   image_link: string;
   number_of_completions: number;
+};
+
+export type ReviewOutput = {
+  reveiw: string;
 };
 
 export type googleBookResult = {

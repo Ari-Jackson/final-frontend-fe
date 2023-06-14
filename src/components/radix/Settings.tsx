@@ -6,15 +6,10 @@ import DeleteButton from "./DeleteButton";
 export default function Settings({
   id,
   handleDelete,
-  // setEditorIsActive,
-  editorIsActive,
 }: {
   id: string | undefined;
   handleDelete: () => void;
-  setEditorIsActive?: React.Dispatch<React.SetStateAction<boolean>>;
-  editorIsActive?: boolean;
 }) {
-  // const handleToggleEditor = () => setEditorIsActive((data) => !data);
   return (
     <>
       <DropdownMenu.Root>
@@ -29,13 +24,7 @@ export default function Settings({
             <DropdownMenu.Group>
               <DropdownMenu.Label />
               <DropdownMenu.Item className="text-6 group relative my-1 flex h-6 select-none items-center rounded-sm px-5 leading-none outline-none data-[highlighted]:bg-pink-400 data-[highlighted]:text-white sm:hover:cursor-pointer">
-                <Link to={`/books/${id}/edit`}>Edit Book</Link>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item
-                disabled
-                className="group relative my-1 flex h-6 select-none items-center rounded-sm px-5 leading-none outline-none data-[disabled]:cursor-not-allowed data-[hover]:cursor-pointer data-[highlighted]:bg-pink-400 data-[disabled]:text-gray-200 data-[highlighted]:text-white"
-              >
-                <div>{!editorIsActive ? "Edit Review" : "Close Editor"}</div>
+                <Link to={`/books/${id}/edit`}>Edit Book Details</Link>
               </DropdownMenu.Item>
               <DropdownMenu.Separator />
               <DeleteButton handleDelete={handleDelete}>
