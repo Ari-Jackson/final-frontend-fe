@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AiFillHome, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlinePlus } from "react-icons/ai";
 import { SignInButton, UserButton, useAuth } from "@clerk/clerk-react";
 
 export default function NavBar() {

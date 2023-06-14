@@ -6,7 +6,7 @@ import {
 import { Inputs } from "../utils/types";
 import { cn } from "../utils/cn";
 import useGoogleBooks from "../hooks/queries/useGoogleBooks";
-import { LegacyRef, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Form({
   values,
@@ -195,7 +195,7 @@ const GoogleBookSearch = ({
   setValue: UseFormSetValue<Inputs>;
   bookInfo: Inputs;
 }) => {
-  const ref = useRef<HTMLButtonElement>();
+  const ref = useRef<HTMLButtonElement>(null);
   const [submittedValue, setSubmittedValue] = useState("");
   const { register, handleSubmit, reset, watch } = useForm<GoogleSearchInputs>({
     defaultValues: {
