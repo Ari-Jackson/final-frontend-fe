@@ -6,7 +6,7 @@ import {
 import { Inputs } from "../utils/types";
 import { cn } from "../utils/cn";
 import useGoogleBooks from "../hooks/queries/useGoogleBooks";
-import { useEffect, useState } from "react";
+import { LegacyRef, useEffect, useRef, useState } from "react";
 
 export default function Form({
   values,
@@ -195,6 +195,7 @@ const GoogleBookSearch = ({
   setValue: UseFormSetValue<Inputs>;
   bookInfo: Inputs;
 }) => {
+  const ref = useRef<HTMLButtonElement>();
   const [submittedValue, setSubmittedValue] = useState("");
   const { register, handleSubmit, reset, watch } = useForm<GoogleSearchInputs>({
     defaultValues: {
@@ -243,7 +244,6 @@ const GoogleBookSearch = ({
     setValue("pageCount", selectedBook.pageCount ? selectedBook.pageCount : 1);
     setValue("imageLink", selectedBook.imageLink ? selectedBook.imageLink : "");
   };
-
   return (
     <>
       <div className={cn(bookInfo.googleBooksId && "hidden")}>
@@ -276,7 +276,7 @@ const GoogleBookSearch = ({
                   selectedBook.googleBooksId === id &&
                     "bg-pink-500 shadow-lg duration-100"
                 )}
-                onClick={() =>
+                onClick={() => {
                   setSelectedBook({
                     googleBooksId: id,
                     title: volumeInfo.title,
@@ -287,8 +287,9 @@ const GoogleBookSearch = ({
                     imageLink: !volumeInfo.imageLinks
                       ? "https://dummyimage.com/400x600/969696/dbdbdb"
                       : volumeInfo.imageLinks.smallThumbnail,
-                  })
-                }
+                  });
+                  ref.current?.scrollIntoView();
+                }}
               >
                 <img
                   src={
@@ -309,6 +310,7 @@ const GoogleBookSearch = ({
         </div>
         {googleBooks && (
           <button
+            ref={ref}
             disabled={!selectedBook.googleBooksId}
             onClick={() => handleNext()}
             className=" text-md mt-4 w-fit rounded border bg-pink-400 px-6 py-3 font-semibold text-white shadow disabled:cursor-not-allowed disabled:bg-gray-200 disabled:hover:bg-gray-200 disabled:hover:text-white xl:hover:bg-pink-200 xl:hover:text-pink-400"
