@@ -34,5 +34,8 @@ The Shelf leverages the following technologies and frameworks:
 
  #### Set up the environment variables:
 - [ ] Create a `.env` file in the project root.
-- [ ] Set Up a google developer account to use the Google Books API
+- [ ] Set up a [google developer account](https://console.cloud.google.com/) to use the Google Books API
+- [ ] Set up [Clerk](https://clerk.com/) account, navigate to the dashboard, create a new project
 - [ ] Define the required environment variables according to the template
+
+
